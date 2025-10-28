@@ -1,0 +1,232 @@
+index.html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jewellery - Elegant Collection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#b8860b; /* gold-ish */
+      --dark:#222;
+      --muted:#777;
+      --card-bg:#fff;
+      --page-bg:#f7f6f4;
+      --max-width:1100px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Montserrat,system-ui,Arial,sans-serif;margin:0;background:var(--page-bg);color:var(--dark);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+
+    /* container */
+    .wrap{max-width:var(--max-width);margin:0 auto;padding:28px}
+
+    /* header */
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--dark)}
+    .tag{font-size:12px;color:var(--muted);}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav a{font-weight:600;color:var(--muted)}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin:18px 0}
+    .hero-card{background:linear-gradient(180deg,rgba(255,255,255,0.75),rgba(255,255,255,0.9));padding:28px;border-radius:14px;box-shadow:0 8px 30px rgba(20,20,20,0.06)}
+    .hero h1{font-family:'Playfair Display';font-size:38px;margin:0 0 8px}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .cta{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:10px;font-weight:700}
+
+    /* product grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
+    .card{background:var(--card-bg);border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(20,20,20,0.06);transition:transform .18s ease;margin-bottom:4px}
+    .card:hover{transform:translateY(-6px)}
+    .thumb{width:100%;height:200px;object-fit:cover;display:block}
+    .info{padding:12px}
+    .title{font-weight:600;margin:0 0 6px}
+    .price{color:var(--accent);font-weight:700}
+    .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+    .btn{border:1px solid var(--accent);padding:8px 10px;border-radius:8px;background:transparent;font-weight:700;cursor:pointer}
+
+    /* filters */
+    .filters{display:flex;gap:8px;align-items:center;margin:12px 0}
+    .search{flex:1}
+    .input{padding:10px;border-radius:8px;border:1px solid #e5e5e5;width:100%}
+
+    /* modal quick view */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.45);visibility:hidden;opacity:0;transition:opacity .18s}
+    .modal.open{visibility:visible;opacity:1}
+    .modal-card{width:900px;max-width:94%;background:#fff;border-radius:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px}
+    .modal-card img{width:100%;height:420px;object-fit:cover;border-radius:8px}
+    .modal-info{padding:6px}
+    .close{position:absolute;right:18px;top:18px;font-weight:700;background:#fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid #eee}
+
+    /* footer */
+    footer{margin-top:28px;padding:18px 0;color:var(--muted);border-top:1px solid #eee}
+
+    /* responsive */
+    @media (max-width:860px){
+      .hero{grid-template-columns:1fr}
+      .modal-card{grid-template-columns:1fr}
+      .modal-card img{height:260px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">Kala Jewellers</div>
+        <div class="tag">Handcrafted • Timeless</div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#collection">Collection</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Fine Jewellery — Curated For You</h1>
+        <p>Explore handpicked necklaces, rings and earrings crafted with love. Perfect for gifting and everyday elegance.</p>
+        <a href="#collection" class="cta">Shop the Collection</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="hero-card" style="display:flex;gap:12px;align-items:center">
+          <img src="https://picsum.photos/seed/diamond/220/140" alt="feature" style="width:120px;height:80px;object-fit:cover;border-radius:8px">
+          <div>
+            <div style="font-weight:700">Free Shipping</div>
+            <div class="tag">On orders over ₹5,000</div>
+          </div>
+        </div>
+        <div class="hero-card" style="display:flex;gap:12px;align-items:center">
+          <img src="https://picsum.photos/seed/handmade/220/140" alt="feature2" style="width:120px;height:80px;object-fit:cover;border-radius:8px">
+          <div>
+            <div style="font-weight:700">Authenticity Guaranteed</div>
+            <div class="tag">Hallmarked & certified</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="filters">
+      <input class="input search" id="search" placeholder="Search by name (e.g. necklace, ring)..." />
+      <select id="category" class="input" style="width:160px">
+        <option value="all">All categories</option>
+        <option value="necklace">Necklaces</option>
+        <option value="rings">Rings</option>
+        <option value="earrings">Earrings</option>
+      </select>
+    </div>
+
+    <section id="collection">
+      <div class="grid" id="productGrid">
+        <!-- cards inserted by JS -->
+      </div>
+    </section>
+
+    <footer id="contact">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+        <div>
+          <strong>Kala Jewellers</strong><div class="tag">Made in India • Since 2023</div>
+        </div>
+        <div class="tag">Email: <a href="mailto:hello@aarna.example">hello@aarna.example</a> • Phone: +91 98765 43210</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Quick view modal -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <div class="modal-card" role="document">
+      <button class="close" id="modalClose" aria-label="Close">✕</button>
+      <img id="modalImg" src="" alt="product image">
+      <div class="modal-info">
+        <h3 id="modalTitle">Title</h3>
+        <div id="modalPrice" style="font-size:20px;font-weight:700;margin:8px 0"></div>
+        <p id="modalDesc" style="color:var(--muted)"></p>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button id="addCart" class="btn">Add to Cart</button>
+          <a id="buyNow" class="cta" href="#">Buy Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sample product data. Replace with your own images and names.
+    const products = [
+      {id:1,title:'Classic Pearl Necklace',price:'₹6,500',cat:'necklace',img:'https://picsum.photos/seed/p1/800/600',desc:'Freshwater pearls on a sterling chain.'},
+      {id:2,title:'Solitaire Diamond Ring',price:'₹28,999',cat:'rings',img:'https://picsum.photos/seed/p2/800/600',desc:'Brilliant cut solitaire in a gold setting.'},
+      {id:3,title:'Elegant Hoops',price:'₹2,750',cat:'earrings',img:'https://picsum.photos/seed/p3/800/600',desc:'Lightweight hoops for daily wear.'},
+      {id:4,title:'Statement Kundan Necklace',price:'₹15,200',cat:'necklace',img:'https://picsum.photos/seed/p4/800/600',desc:'Traditional kundan with modern finish.'},
+      {id:5,title:'Gold Band - Minimal',price:'₹7,400',cat:'rings',img:'https://picsum.photos/seed/p5/800/600',desc:'Polished 18k gold band.'},
+      {id:6,title:'Stud Earrings with Zircon',price:'₹1,350',cat:'earrings',img:'https://picsum.photos/seed/p6/800/600',desc:'Sparkling zircon studs.'}
+    ];
+
+    const grid = document.getElementById('productGrid');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalClose = document.getElementById('modalClose');
+
+    function render(list){
+      grid.innerHTML='';
+      list.forEach(p=>{
+        const el = document.createElement('article');
+        el.className='card';
+        el.innerHTML = `
+          <img class="thumb" src="${p.img}" alt="${p.title}">
+          <div class="info">
+            <div class="title">${p.title}</div>
+            <div class="price">${p.price}</div>
+            <div class="meta">
+              <button class="btn" data-id="${p.id}">Quick View</button>
+              <div class="tag">${p.cat.charAt(0).toUpperCase()+p.cat.slice(1)}</div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+      // attach listeners
+      document.querySelectorAll('.btn[data-id]').forEach(b=>b.addEventListener('click',e=>{
+        const id = +e.currentTarget.getAttribute('data-id');
+        openModal(products.find(x=>x.id===id));
+      }));
+    }
+
+    function openModal(p){
+      modalImg.src = p.img;
+      modalTitle.textContent = p.title;
+      modalPrice.textContent = p.price;
+      modalDesc.textContent = p.desc;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+    }
+
+    modalClose.addEventListener('click',()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true')});
+    modal.addEventListener('click',e=>{if(e.target===modal) {modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}});
+
+    // search & filter
+    document.getElementById('search').addEventListener('input',applyFilter);
+    document.getElementById('category').addEventListener('change',applyFilter);
+
+    function applyFilter(){
+      const q = document.getElementById('search').value.trim().toLowerCase();
+      const cat = document.getElementById('category').value;
+      let list = products.filter(p=> (p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)) );
+      if(cat!== 'all') list = list.filter(p=>p.cat===cat);
+      render(list);
+    }
+
+    // initial render
+    render(products);
+  </script>
+</body>
+</html>
