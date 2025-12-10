@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jewellery - Elegant Collection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#b8860b; /* gold-ish */
+      --dark:#222;
+      --muted:#777;
+      --card-bg:#fff;
+      --page-bg:#f7f6f4;
+      --max-width:1100px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Montserrat,system-ui,Arial,sans-serif;margin:0;background:var(--page-bg);color:var(--dark);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+
+    /* container */
+    .wrap{max-width:var(--max-width);margin:0 auto;padding:28px}
+
+    /* header */
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--dark)}
+    .tag{font-size:12px;color:var(--muted);}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav a{font-weight:600;color:var(--muted)}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin:18px 0}
+    .hero-card{background:linear-gradient(180deg,rgba(255,255,255,0.75),rgba(255,255,255,0.9));padding:28px;border-radius:14px;box-shadow:0 8px 30px rgba(20,20,20,0.06)}
+    .hero h1{font-family:'Playfair Display';font-size:38px;margin:0 0 8px}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .cta{display:inline-block;background:var(--accent);color:#fff;padding:10px 18px;border-radius:10px;font-weight:700}
+
+    /* product grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
+    .card{background:var(--card-bg);border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(20,20,20,0.06);transition:transform .18s ease;margin-bottom:4px}
+    .card:hover{transform:translateY(-6px)}
+    .thumb{width:100%;height:200px;object-fit:cover;display:block}
+    .info{padding:12px}
+    .title{font-weight:600;margin:0 0 6px}
+    .price{color:var(--accent);font-weight:700}
+    .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+    .btn{border:1px solid var(--accent);padding:8px 10px;border-radius:8px;background:transparent;font-weight:700;cursor:pointer}
+
+    /* filters */
+    .filters{display:flex;gap:8px;align-items:center;margin:12px 0}
+    .search{flex:1}
+    .input{padding:10px;border-radius:8px;border:1px solid #e5e5e5;width:100%}
+
+    /* modal quick view */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,0.45);visibility:hidden;opacity:0;transition:opacity .18s}
+    .modal.open{visibility:visible;opacity:1}
+    .modal-card{position:relative;width:900px;max-width:94%;background:#fff;border-radius:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px}
+    .modal-card img{width:100%;height:420px;object-fit:cover;border-radius:8px}
+    .modal-info{padding:6px}
+    .close{position:absolute;right:18px;top:18px;font-weight:700;background:#fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid #eee}
+
+    /* footer */
+    footer{margin-top:28px;padding:18px 0;color:var(--muted);border-top:1px solid #eee}
+
+    /* responsive */
+    @media (max-width:860px){
+      .hero{grid-template-columns:1fr}
+      .modal-card{grid-template-columns:1fr}
+      .modal-card img{height:260px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">Kala Jewellers</div>
+        <div class="tag">Handcrafted • Timeless</div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#collection">Collection</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Fine Jewellery — Curated For You</h1>
+        <p>Explore handpicked necklaces, rings and earrings crafted with love. Perfect for gifting and everyday elegance.</p>
+        <a href="#collection" class="cta">Shop the Collection</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="hero-card" style="display:flex;gap:12px;align-items:center">
+          <img src="https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg" alt="feature" style="width:120px;height:80px;object-fit:cover;border-radius:8px">
+          <div>
+            <div style="font-weight:700">Kala Jewellers</div>
+            <div class="tag">Please Contact  कला ज्वेलर्स </div>
+          </div>
+        </div>
+        <div class="hero-card" style="display:flex;gap:12px;align-items:center">
+          <img src="https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg" alt="feature2" style="width:120px;height:80px;object-fit:cover;border-radius:8px">
+          <div>
+            <div style="font-weight:700">Please Contact</div>
+            <div class="tag">Hallmarked & certified</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="filters">
+      <input class="input search" id="search" placeholder="Search by name (e.g. necklace, ring)..." />
+      <select id="category" class="input" style="width:160px">
+        <option value="all">All categories</option>
+        <option value="necklace">Necklaces</option>
+        <option value="rings">Rings</option>
+        <option value="earrings">Earrings</option>
+      </select>
+    </div>
+
+    <section id="collection">
+      <div class="grid" id="productGrid">
+        <!-- cards inserted by JS -->
+      </div>
+    </section>
+
+    <!-- About Section (inserted here as requested) -->
+    <section id="about" style="margin-top:40px;">
+      <div class="hero-card" style="padding:35px;border-left:5px solid var(--accent);">
+        <h2 style="font-family:'Playfair Display', serif; font-size:32px; margin-bottom:10px;">
+          <span style="color:var(--accent); margin-right:8px;">👑</span> About Kala Jewellers
+        </h2>
+
+        <!-- Language Toggle -->
+        <div style="margin-bottom:12px;">
+          <button onclick="showLang('en')" id="langEnBtn" style="padding:6px 12px; border:none; border-radius:8px; background:var(--accent); color:#fff; cursor:pointer;">English</button>
+          <button onclick="showLang('mr')" id="langMrBtn" style="padding:6px 12px; border:none; border-radius:8px; background:#777; color:#fff; cursor:pointer;">Marathi</button>
+        </div>
+
+        <!-- English Content -->
+        <div id="about-en" style="line-height:1.7; color:var(--muted); font-size:15px;">
+          <p>Established in <strong>2000</strong>, Kala Jewellers began its journey with a vision of purity, trust, and fine craftsmanship. 
+          From a modest beginning, we steadily earned the love and confidence of our customers through dedication, transparency and timeless jewellery designs.</p>
+          <p>Today, we are proud to expand our legacy with a <strong>dedicated branch in Chandrapur</strong> — the historic and renowned 
+          <strong>"Black Gold City."</strong> This milestone represents not just growth, but our ongoing commitment to serving customers 
+          with hallmarked purity, fair pricing, and a premium jewellery experience.</p>
+          <p>Under the guidance of <strong>Mr. Rakesh</strong> and <strong>Mr. Sandip</strong>, Kala Jewellers continues to evolve with 
+          modern trends while honoring the heritage of traditional Indian jewellery.</p>
+
+          <!-- Read More Content -->
+          <div id="read-more" style="display:none;">
+            <p>We take pride in crafting jewellery that symbolizes emotion, culture, and trust. Every piece is designed to delight and create lasting memories.</p>
+          </div>
+          <button id="readBtn" class="btn" style="margin-top:8px;">Read More</button>
+
+          <p style="margin-top:14px; font-weight:700; font-size:18px; color:var(--accent);">
+            Kala Jewellers — Since 2000 | Pure Gold. Pure Trust.
+          </p>
+        </div>
+
+        <!-- Marathi Content -->
+        <div id="about-mr" style="line-height:1.7; color:var(--muted); font-size:15px; display:none;">
+          <h2 style="font-family:'Playfair Display', serif; font-size:32px; margin-bottom:10px;">
+            <span style="color:var(--accent); margin-right:8px;">👑</span> कला ज्वेलर्स
+          </h2>
+          <p>स्थापित <strong>2000</strong> मध्ये, कला ज्वेलर्स ने शुद्धता, विश्वास आणि उत्कृष्ट कारागिरी या दृष्टिकोनाने आपला प्रवास सुरू केला. 
+          लहान सुरुवातीपासून, आम्ही समर्पण, पारदर्शकता आणि कलातीत दागिन्यांच्या डिझाइनद्वारे ग्राहकांचा विश्वास आणि प्रेम जिंकले आहे.</p>
+          <p>आज, आम्ही <strong>चंद्रपूर</strong> मध्ये आपला समर्पित शाखा सुरू केल्याचा अभिमान बाळगतो — ऐतिहासिक आणि प्रसिद्ध 
+          <strong>"ब्लॅक गोल्ड सिटी"</strong>. हा टप्पा केवळ वाढ दर्शवत नाही, तर हॉलमार्क शुद्धता, योग्य दर आणि प्रीमियम ज्वेलरी अनुभव देण्याची आमची कटिबद्धता दाखवतो.</p>
+          <p>श्री राकेश आणि श्री संदीप यांच्या मार्गदर्शनाखाली, कला ज्वेलर्स आधुनिक ट्रेंडसह सतत विकसित होत आहे आणि पारंपरिक भारतीय दागिन्यांचा वारसा जपतो.</p>
+
+          <!-- Read More Content Marathi -->
+          <div id="read-more-mr" style="display:none;">
+            <p>आम्ही अशा दागिन्यांची निर्मिती करतो ज्यात भावना, संस्कृती आणि विश्वास प्रतिबिंबित होतो. प्रत्येक तुकडा आनंद देण्यासाठी आणि आठवणी टिकवण्यासाठी डिझाइन केलेला आहे.</p>
+          </div>
+          <button id="readBtnMr" class="btn" style="margin-top:8px;">अधिक वाचा</button>
+
+          <p style="margin-top:14px; font-weight:700; font-size:18px; color:var(--accent);">
+            कला ज्वेलर्स — 2000 पासून | शुद्ध सोने. शुद्ध विश्वास.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <footer id="contact">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+        <div>
+          <strong>Kala Jewellers</strong><div class="tag">Made in India • Since 2000 </div>
+        </div>
+        <div class="tag">Email: <a href="mailto:sales@kalajewellers.in">sales@kalajewellers.in</a> • Phone: +91 8007777385 //7798977766</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Quick view modal -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <div class="modal-card" role="document">
+      <button class="close" id="modalClose" aria-label="Close">✕</button>
+      <img id="modalImg" src="" alt="product image">
+      <div class="modal-info">
+        <h3 id="modalTitle">Title</h3>
+        <div id="modalPrice" style="font-size:20px;font-weight:700;margin:8px 0"></div>
+        <p id="modalDesc" style="color:var(--muted)"></p>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button id="addCart" class="btn">Add to Cart</button>
+          <a id="buyNow" class="cta" href="#">Buy Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Product data (fixed placeholders)
+    const products = [
+      {id:1,title:'Classic Pearl Necklace',price:'₹1,500',cat:'necklace',img:'https://raw.githubusercontent.com/prashant188/kala/main/CLASSIC_PERL.jpg',desc:'Freshwater pearls on a sterling chain.'},
+      {id:2,title:'Solitaire Diamond Ring',price:'₹28,999',cat:'rings',img:'https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg',desc:'Brilliant cut solitaire set in 18k gold.'},
+      {id:3,title:'Elegant Hoops',price:'₹3,750',cat:'earrings',img:'https://github.com/prashant188/kala/raw/c8644dce33e35b58fc004bae04a8f300911db69c/eleganthoops.jpg',desc:'Lightweight hoops for daily wear.'},
+      {id:4,title:'Statement Kundan Necklace',price:'Please contact',cat:'necklace',img:'https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg',desc:'Traditional kundan work with polki stones. Contact for price and customization.'},
+      {id:5,title:'Gold Band - Minimal',price:'Please contact',cat:'rings',img:'https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg',desc:'Polished 18k gold band, available in multiple widths.'},
+      {id:6,title:'Stud Earrings with Zircon',price:'Please contact',cat:'earrings',img:'https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg',desc:'Sparkling zircon studs set in gold-plated silver.'}
+    ];
+
+    const grid = document.getElementById('productGrid');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalClose = document.getElementById('modalClose');
+
+    function render(list){
+      grid.innerHTML='';
+      list.forEach(p=>{
+        const el = document.createElement('article');
+        el.className='card';
+        el.innerHTML = `
+          <img class="thumb" src="${p.img}" alt="${p.title}">
+          <div class="info">
+            <div class="title">${p.title}</div>
+            <div class="price">${p.price}</div>
+            <div class="meta">
+              <button class="btn" data-id="${p.id}">Quick View</button>
+              <div class="tag">${p.cat.charAt(0).toUpperCase()+p.cat.slice(1)}</div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+      // attach listeners
+      document.querySelectorAll('.btn[data-id]').forEach(b=>b.addEventListener('click',e=>{
+        const id = +e.currentTarget.getAttribute('data-id');
+        const item = products.find(x=>x.id===id);
+        if(item) openModal(item);
+      }));
+    }
+
+    function openModal(p){
+      modalImg.src = p.img;
+      modalImg.alt = p.title;
+      modalTitle.textContent = p.title;
+      modalPrice.textContent = p.price;
+      modalDesc.textContent = p.desc;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+    }
+
+    modalClose.addEventListener('click',()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true')});
+    modal.addEventListener('click',e=>{if(e.target===modal) {modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}});
+
+    // search & filter
+    document.getElementById('search').addEventListener('input',applyFilter);
+    document.getElementById('category').addEventListener('change',applyFilter);
+
+    function applyFilter(){
+      const q = document.getElementById('search').value.trim().toLowerCase();
+      const cat = document.getElementById('category').value;
+      let list = products.filter(p=> (p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)) );
+      if(cat!== 'all') list = list.filter(p=>p.cat===cat);
+      render(list);
+    }
+
+    // initial render
+    render(products);
+
+    // Language Toggle + Read More (About section)
+    function showLang(lang){
+      const en = document.getElementById('about-en');
+      const mr = document.getElementById('about-mr');
+      const enBtn = document.getElementById('langEnBtn');
+      const mrBtn = document.getElementById('langMrBtn');
+
+      if(lang==='en'){
+        en.style.display='block';
+        mr.style.display='none';
+        enBtn.style.background = 'var(--accent)';
+        mrBtn.style.background = '#777';
+      } else {
+        en.style.display='none';
+        mr.style.display='block';
+        enBtn.style.background = '#777';
+        mrBtn.style.background = 'var(--accent)';
+      }
+    }
+
+    function toggleRead(lang='en'){
+      if(lang==='en'){
+        const more = document.getElementById('read-more');
+        const btn = document.getElementById('readBtn');
+        if(more.style.display==='none' || more.style.display===''){
+          more.style.display='block'; btn.textContent='Read Less';
+        } else {
+          more.style.display='none'; btn.textContent='Read More';
+        }
+      } else {
+        const more = document.getElementById('read-more-mr');
+        const btn = document.getElementById('readBtnMr');
+        if(more.style.display==='none' || more.style.display===''){
+          more.style.display='block'; btn.textContent='कमी वाचा';
+        } else {
+          more.style.display='none'; btn.textContent='अधिक वाचा';
+        }
+      }
+    }
+
+    // wire read buttons
+    document.getElementById('readBtn').addEventListener('click',()=>toggleRead('en'));
+    document.getElementById('readBtnMr').addEventListener('click',()=>toggleRead('mr'));
+
+    // default language
+    showLang('en');
+  </script>
+</body>
+</html>
