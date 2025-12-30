@@ -27,7 +27,7 @@
     header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--dark)}
-    .tag{font-size:12px;color:var(--muted);}
+    .tag{font-size:12px;color:var(--muted);} 
     nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
     nav a{font-weight:600;color:var(--muted)}
 
@@ -62,6 +62,20 @@
     .modal-info{padding:6px}
     .close{position:absolute;right:18px;top:18px;font-weight:700;background:#fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid #eee}
 
+    /* right-column slider (vertical sliding up) */
+    .right-col { display:flex; flex-direction:column; gap:12px; }
+    .slider { position:relative; height:180px; overflow:hidden; border-radius:12px; box-shadow:0 6px 18px rgba(20,20,20,0.06); background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.98)); }
+    .slider-track { display:flex; flex-direction:column; transition:transform .6s cubic-bezier(.2,.9,.2,1); }
+    .slide { display:flex; align-items:center; gap:12px; padding:12px; box-sizing:border-box; height:180px; }
+    .slide img { width:120px; height:120px; object-fit:cover; border-radius:8px; flex-shrink:0; }
+    .slide .s-info { font-size:14px; color:var(--muted); }
+    .slide .s-title{ font-weight:700; color:var(--dark); margin-bottom:6px; }
+    .slider-controls { position:absolute; right:8px; top:8px; display:flex; gap:6px; z-index:3; }
+    .slider-controls button { background:rgba(255,255,255,0.95); border:1px solid #eee; padding:6px 8px; border-radius:8px; cursor:pointer; font-weight:700; }
+    .slider-indicators { position:absolute; left:10px; bottom:8px; display:flex; gap:6px; z-index:3; }
+    .indicator { width:8px; height:8px; border-radius:50%; background:rgba(0,0,0,0.12); cursor:pointer; }
+    .indicator.active { background:var(--accent); }
+
     /* footer */
     footer{margin-top:28px;padding:18px 0;color:var(--muted);border-top:1px solid #eee}
 
@@ -70,6 +84,8 @@
       .hero{grid-template-columns:1fr}
       .modal-card{grid-template-columns:1fr}
       .modal-card img{height:260px}
+      .slider { height:160px; }
+      .slide, .slide img { height:160px; }
     }
   </style>
 </head>
@@ -95,19 +111,55 @@
         <p>Explore handpicked necklaces, rings and earrings crafted with love. Perfect for gifting and everyday elegance.</p>
         <a href="#collection" class="cta">Shop the Collection</a>
       </div>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <div class="hero-card" style="display:flex;gap:12px;align-items:center">
-          <img src="https://raw.githubusercontent.com/prashant188/kala/main/KALA2.jpg" alt="feature" style="width:120px;height:80px;object-fit:cover;border-radius:8px">
-          <div>
-            <div style="font-weight:700">Kala Jewellers</div>
-            <div class="tag">Please Contact  कला ज्वेलर्स. </div>
+
+      <!-- RIGHT COLUMN: replaced with vertical slider supporting up to 4 images -->
+      <div class="right-col" aria-hidden="false">
+        <div class="slider" id="heroSlider" aria-label="Featured images slider">
+          <div class="slider-track" id="sliderTrack">
+            <!-- slides (up to 4). Update image URLs as needed -->
+            <div class="slide">
+              <img src="https://raw.githubusercontent.com/prashant188/kala/main/KALA2.jpg" alt="Kala Jewellers feature 1">
+              <div class="s-info">
+                <div class="s-title">Kala Jewellers</div>
+                <div class="tag">Please Contact • Hallmarked & certified</div>
+              </div>
+            </div>
+
+            <div class="slide">
+              <img src="https://raw.githubusercontent.com/prashant188/kala/main/CLASSIC_PERL.jpg" alt="Classic Pearl Necklace">
+              <div class="s-info">
+                <div class="s-title">Classic Pearl Necklace</div>
+                <div class="tag">Handpicked pearls • Elegant gifting</div>
+              </div>
+            </div>
+
+            <div class="slide">
+              <img src="https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg" alt="Daily wear collection">
+              <div class="s-info">
+                <div class="s-title">Daily Wear</div>
+                <div class="tag">Comfortable • Timeless designs</div>
+              </div>
+            </div>
+
+            <div class="slide">
+              <img src="https://github.com/prashant188/kala/raw/c8644dce33e35b58fc004bae04a8f300911db69c/eleganthoops.jpg" alt="Elegant Hoops">
+              <div class="s-info">
+                <div class="s-title">Elegant Hoops</div>
+                <div class="tag">Lightweight • Everyday sparkle</div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="hero-card" style="display:flex;gap:12px;align-items:center">
-          <img src="https://raw.githubusercontent.com/prashant188/kala/main/KALA2.jpg" alt="feature2" style="width:120px;height:80px;object-fit:cover;border-radius:8px">
-          <div>
-            <div style="font-weight:700">Please Contact</div>
-            <div class="tag">Hallmarked & certified</div>
+
+          <div class="slider-controls" aria-hidden="false">
+            <button id="sliderPrev" aria-label="Previous">◀</button>
+            <button id="sliderNext" aria-label="Next">▶</button>
+          </div>
+
+          <div class="slider-indicators" id="sliderIndicators" aria-hidden="false">
+            <div class="indicator" data-index="0"></div>
+            <div class="indicator" data-index="1"></div>
+            <div class="indicator" data-index="2"></div>
+            <div class="indicator" data-index="3"></div>
           </div>
         </div>
       </div>
@@ -168,15 +220,13 @@
           <h2 style="font-family:'Playfair Display', serif; font-size:32px; margin-bottom:10px;">
             <span style="color:var(--accent); margin-right:8px;">👑</span> कला ज्वेलर्स
           </h2>
-          <p>स्थापित <strong>2000</strong> मध्ये, कला ज्वेलर्स ने शुद्धता, विश्वास आणि उत्कृष्ट कारागिरी या दृष्टिकोनाने आपला प्रवास सुरू केला. 
-          लहान सुरुवातीपासून, आम्ही समर्पण, पारदर्शकता आणि कलातीत दागिन्यांच्या डिझाइनद्वारे ग्राहकांचा विश्वास आणि प्रेम जिंकले आहे.</p>
-          <p>आज, आम्ही <strong>चंद्रपूर</strong> मध्ये आपला समर्पित शाखा सुरू केल्याचा अभिमान बाळगतो — ऐतिहासिक आणि प्रसिद्ध 
-          <strong>"ब्लॅक गोल्ड सिटी"</strong>. हा टप्पा केवळ वाढ दर्शवत नाही, तर हॉलमार्क शुद्धता, योग्य दर आणि प्रीमियम ज्वेलरी अनुभव देण्याची आमची कटिबद्धता दाखवतो.</p>
-          <p>श्री राकेश आणि श्री संदीप यांच्या मार्गदर्शनाखाली, कला ज्वेलर्स आधुनिक ट्रेंडसह सतत विकसित होत आहे आणि पारंपरिक भारतीय दागिन्यांचा वारसा जपतो.</p>
+          <p>स्थापित <strong>2000</strong> मध्ये, कला ज्वेलर्स ने शुद्धता, विश्वास आणि उत्कृष्ट[...] 
+          लहान सुरुवातीपासून, आम्ही समर्पण, पारदर्शकता आणि कलातीत दागिन्यांच्[...]</p>
+          <p>आज, आम्ही <strong>चंद्रपूर</strong> मध्ये आपला समर्पित शाखा सुरू केल्याचा अभिम[...]</p>
 
           <!-- Read More Content Marathi -->
           <div id="read-more-mr" style="display:none;">
-            <p>आम्ही अशा दागिन्यांची निर्मिती करतो ज्यात भावना, संस्कृती आणि विश्वास प्रतिबिंबित होतो. प्रत्येक तुकडा आनंद देण्यासाठी आणि आठवणी टिकवण्यासाठी डिझाइन केलेला आहे.</p>
+            <p>आम्ही अशा दागिन्यांची निर्मिती करतो ज्यात भावना, संस्कृती आणि विश्[...]</p>
           </div>
           <button id="readBtnMr" class="btn" style="margin-top:8px;">अधिक वाचा</button>
 
@@ -203,9 +253,9 @@
         <!-- English Content -->
         <div id="about-en" style="line-height:1.7; color:var(--muted); font-size:15px;">
  
-		  TUKUM, CHANDRAPUR
-		  Address 123456789
-		  </p>
+	  TUKUM, CHANDRAPUR
+	  Address 123456789
+	  </p>
          
         
           <p style="margin-top:14px; font-weight:400; font-size:18px; color:var(--accent);">
@@ -248,11 +298,11 @@
     // Product data (fixed placeholders)
     const products = [
       {id:1,title:'Classic Pearl Necklace',price:'₹1,500',cat:'necklace',img:'https://raw.githubusercontent.com/prashant188/kala/main/CLASSIC_PERL.jpg',desc:'Freshwater pearls on a sterling chain.'},
-      {id:2,title:'Solitaire Diamond Ring',price:'₹28,999',cat:'rings',img:'https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg',desc:'Brilliant cut solitaire set in 18k gold.'},
-      {id:3,title:'Elegant Hoops',price:'₹3,750',cat:'earrings',img:'https://github.com/prashant188/kala/raw/c8644dce33e35b58fc004bae04a8f300911db69c/eleganthoops.jpg',desc:'Lightweight hoops for daily wear.'},
-      {id:4,title:'Statement Kundan Necklace',price:'Please contact',cat:'necklace',img:'https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg',desc:'Traditional kundan work with polki stones. Contact for price and customization.'},
-      {id:5,title:'Gold Band - Minimal',price:'Please contact',cat:'rings',img:'https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg',desc:'Polished 18k gold band, available in multiple widths.'},
-      {id:6,title:'Stud Earrings with Zircon',price:'Please contact',cat:'earrings',img:'https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg',desc:'Sparkling zircon studs set in gold-plated silver.'}
+      {id:2,title:'Solitaire Diamond Ring',price:'₹28,999',cat:'rings',img:'https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg',desc:'Brilliant cut diamond solitaire.'},
+      {id:3,title:'Elegant Hoops',price:'₹3,750',cat:'earrings',img:'https://github.com/prashant188/kala/raw/c8644dce33e35b58fc004bae04a8f300911db69c/eleganthoops.jpg',desc:'Lightweight hoops for everyday wear.'},
+      {id:4,title:'Statement Kundan Necklace',price:'Please contact',cat:'necklace',img:'https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg',desc:'Traditional kundan work.'},
+      {id:5,title:'Gold Band - Minimal',price:'Please contact',cat:'rings',img:'https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg',desc:'Polished 18k band.'},
+      {id:6,title:'Stud Earrings with Zircon',price:'Please contact',cat:'earrings',img:'https://github.com/prashant188/kala/raw/ce7aa3446a84d8e48fb091ad71d2009ea3f33639/dailwearing.jpg',desc:'Sparkling zircon studs.'},
     ];
 
     const grid = document.getElementById('productGrid');
@@ -314,7 +364,7 @@
       render(list);
     }
 
-    // initial render 1
+    // initial render
     render(products);
 
     // Language Toggle + Read More (About section)
@@ -363,12 +413,66 @@
 
     // default language
     showLang('en');
+
+    /* --- HERO SLIDER JS --- */
+    (function(){
+      const slider = document.getElementById('heroSlider');
+      const track = document.getElementById('sliderTrack');
+      const slides = Array.from(track.children);
+      const prev = document.getElementById('sliderPrev');
+      const next = document.getElementById('sliderNext');
+      const indicators = Array.from(document.querySelectorAll('#sliderIndicators .indicator'));
+      let current = 0;
+      let timer = null;
+
+      function update() {
+        const h = slider.clientHeight; // slide height
+        track.style.transform = `translateY(-${current * h}px)`;
+        indicators.forEach((ind,i)=> ind.classList.toggle('active', i===current));
+      }
+
+      function nextSlide(){
+        current = (current + 1) % slides.length;
+        update();
+      }
+      function prevSlide(){
+        current = (current - 1 + slides.length) % slides.length;
+        update();
+      }
+
+      // auto-play
+      function start() {
+        stop();
+        timer = setInterval(nextSlide, 3500);
+      }
+      function stop() {
+        if(timer) { clearInterval(timer); timer = null; }
+      }
+
+      // controls
+      next.addEventListener('click', ()=> { nextSlide(); start(); });
+      prev.addEventListener('click', ()=> { prevSlide(); start(); });
+
+      // indicators
+      indicators.forEach(ind => ind.addEventListener('click', e => {
+        const idx = Number(e.currentTarget.dataset.index || 0);
+        current = Math.min(Math.max(idx, 0), slides.length-1);
+        update();
+        start();
+      }));
+
+      // pause on hover
+      slider.addEventListener('mouseenter', stop);
+      slider.addEventListener('mouseleave', start);
+
+      // handle resize (recompute transform)
+      window.addEventListener('resize', update);
+
+      // initialize (limit to slides.length or 4)
+      // If there are more slides than 4 in markup, you can trim; here markup contains 4 slides.
+      update();
+      start();
+    })();
   </script>
 </body>
 </html>
-
-
-
-
-
-
